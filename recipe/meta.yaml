@@ -7,22 +7,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/DFO-LS-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/DFO-LS-{{ version }}.tar.gz
   sha256: a6f20b9af9319a320c78f4f056d001028cea12c823edf683f4cf251abe42b311
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - numpy >=1.11
     - pandas >=0.17
-    - python >=3.6
+    - python >={{ python_min }}
     - scipy >=0.18
 
 test:
@@ -32,6 +32,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/numericalalgorithmsgroup/dfols/
